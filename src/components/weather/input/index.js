@@ -20,7 +20,8 @@ const SearchInput = () => {
     event.preventDefault();
     dispatch(clearErrors());
     if (cityValidationRegex.test(cityName)) {
-      dispatch(getWeather(cityName));
+      let modifiedCityName = cityName.charAt(0).toUpperCase() + cityName.slice(1);
+      dispatch(getWeather(modifiedCityName));
       setInputError(null);
       setCityName('');
     } else {
