@@ -1,0 +1,34 @@
+.input {
+    border: 1px solid aqua;
+    border-radius: 20px;
+    height: 30px;
+    text-align: center;
+    color: black;
+    color: gray;
+}
+
+.input::placeholder {
+    text-align: center;
+    color: gray;
+}
+
+.input:focus, .input:active {
+    outline: none;
+    border-color: aquamarine;
+}
+
+.searchButton {
+    background-color: #BCD9D9FF;
+    border: none;
+    color: gray;
+    padding: 10px 8px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    border-radius: 20px;
+}
+
+.inputError {
+    color: red;
+}
