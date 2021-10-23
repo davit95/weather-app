@@ -1,7 +1,7 @@
 import {
   GET_WEATHER_REQUEST,
   GET_WEATHER_SUCCESS,
-  GET_WEATHER_FAIL, CLEAR_ERRORS
+  GET_WEATHER_FAIL, CLEAR_ERRORS, ADD_ERRORS
 } from '../constants/weather';
 
 const initialState = {
@@ -34,6 +34,12 @@ const weatherReducer = (state = initialState, action) => {
       return {
         ...state,
         errors: null
+      };
+    case ADD_ERRORS:
+      return {
+        ...state,
+        errors : action.payload,
+        weather: {}
       };
     default:
       return state;

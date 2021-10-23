@@ -2,7 +2,8 @@ import {
   GET_WEATHER_FAIL,
   GET_WEATHER_REQUEST,
   GET_WEATHER_SUCCESS,
-  CLEAR_ERRORS
+  CLEAR_ERRORS,
+  ADD_ERRORS
 } from '../constants/weather';
 import { API_KEY } from '../../env';
 
@@ -39,4 +40,11 @@ export const clearErrors = () => dispatch => {
   dispatch({
     type: CLEAR_ERRORS
   })
-}
+};
+
+export const addErrors = (message) => dispatch => {
+  dispatch({
+    type: ADD_ERRORS,
+    payload: message
+  })
+};

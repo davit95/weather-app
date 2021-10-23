@@ -1,35 +1,31 @@
 import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getWeather, clearErrors } from '../../../redux/actions/weatherActions';
+import { getWeather, clearErrors, addErrors } from '../../../redux/actions/weatherActions';
 import './index.css';
-
-const cityValidationRegex = /^[a-zA-Z',.\s-]{1,25}$/g;
 
 const SearchInput = () => {
   const dispatch = useDispatch();
   const { errors } = useSelector(state => state.weather);
   const [cityName, setCityName] = useState('');
-  const [inputError, setInputError] = useState(null);
 
   const handleInputChange = event => {
-    setInputError(null);
+    if (errors) {
+      dispatch(clearErrors());
+    }
     setCityName(event.target.value);
   }
 
   const handleFormSubmit = async event => {
     event.preventDefault();
     dispatch(clearErrors());
-    if (cityValidationRegex.test(cityName)) {
+    if (cityName) {
       let modifiedCityName = cityName.charAt(0).toUpperCase() + cityName.slice(1);
       dispatch(getWeather(modifiedCityName));
-      setInputError(null);
       setCityName('');
     } else {
-      setInputError('Please add valid city name');
+      dispatch(addErrors('City name can not be empty'));
     }
   }
-
-  let error = inputError || errors;
 
   return (
     <form onSubmit={handleFormSubmit}>
@@ -42,7 +38,7 @@ const SearchInput = () => {
       />
       <button className='searchButton'>Search</button>
       {
-        error && <p className='inputError'>{error}</p>
+        errors && <p className='inputError'>{errors}</p>
       }
     </form>
   )
